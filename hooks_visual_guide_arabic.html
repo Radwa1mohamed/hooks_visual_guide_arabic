@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hooks_visual_guide_arabic</title>
+
+    
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-main: #0F1730;
+    --bg-sec: #0B1020;
+    --bg-alt: #111828;
+    --gold: #D4AF37;
+    --gold-dark: #B8941E;
+    --gold-light: rgba(212,175,55,0.12);
+    --gold-line: rgba(212,175,55,0.35);
+    --text-main: #FFFFFF;
+    --text-sec: #C0C0C0;
+    --font: 'Cairo', sans-serif;
+  }
+
+  body { font-family: var(--font); background: transparent; direction: rtl; }
+
+  .wrapper {
+    background: var(--bg-main);
+    border-radius: 20px;
+    padding: 40px 32px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wrapper::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .header-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .header h1 {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--text-main);
+    line-height: 1.3;
+  }
+
+  .header h1 span {
+    color: var(--gold);
+  }
+
+  .header-line {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 16px auto 0;
+    border-radius: 2px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    background: var(--bg-alt);
+    border-radius: 14px;
+    padding: 18px 16px;
+    border: 1px solid var(--gold-line);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    cursor: default;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--gold);
+    border-radius: 0 14px 14px 0;
+  }
+
+  .card:hover {
+    border-color: var(--gold);
+  }
+
+  .card-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    opacity: 0.8;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .card-en {
+    font-size: 10px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    opacity: 0.75;
+  }
+
+  .card-desc {
+    font-size: 12px;
+    color: var(--text-sec);
+    line-height: 1.7;
+  }
+
+  .example-box {
+    background: var(--bg-sec);
+    border-radius: 14px;
+    padding: 20px 20px 20px 20px;
+    border-top: 2px solid var(--gold);
+    margin-top: 4px;
+  }
+
+  .example-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .example-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--text-sec);
+    line-height: 1.6;
+  }
+
+  .example-item:last-child { margin-bottom: 0; }
+
+  .dot {
+    min-width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-top: 6px;
+  }
+
+  .tip-box {
+    background: rgba(212,175,55,0.1);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-top: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .tip-icon {
+    font-size: 16px;
+    min-width: 20px;
+    color: var(--gold);
+    font-weight: 700;
+    line-height: 1.6;
+  }
+
+  .tip-text {
+    font-size: 13px;
+    color: var(--text-main);
+    line-height: 1.7;
+  }
+
+  .tip-text strong {
+    color: var(--gold);
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#0F1730;--bg2:#0B1020;--bg3:#111828;
+    --gold:#D4AF37;--gold2:#B8941E;--gold-a:rgba(212,175,55,0.13);--gold-b:rgba(212,175,55,0.32);
+    --w:#FFFFFF;--g:#C0C0C0;--f:'Cairo',sans-serif;
+  }
+  body{font-family:var(--f);background:transparent;direction:rtl;}
+  .page{background:var(--bg);border-radius:20px;overflow:hidden;}
+  .hero{background:var(--bg2);padding:44px 32px 36px;text-align:center;border-bottom:1px solid var(--gold-b);}
+  .badge{display:inline-block;background:var(--gold-a);border:1px solid var(--gold-b);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:18px;}
+  .hero h1{font-size:28px;font-weight:900;color:var(--w);line-height:1.35;margin-bottom:10px;}
+  .hero h1 span{color:var(--gold);}
+  .hero-sub{font-size:14px;color:var(--g);line-height:1.8;max-width:520px;margin:0 auto 24px;}
+  .price-row{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:24px;}
+  .price-old{font-size:16px;color:var(--g);text-decoration:line-through;opacity:0.7;}
+  .price-new{font-size:34px;font-weight:900;color:var(--gold);}
+  .price-curr{font-size:14px;color:var(--g);margin-top:4px;}
+  .price-badge{background:var(--gold);color:#0B1020;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;align-self:flex-start;margin-top:6px;}
+  .cta-btn{display:inline-block;background:var(--gold);color:#0B1020;font-family:var(--f);font-size:15px;font-weight:700;padding:14px 36px;border-radius:10px;border:none;cursor:pointer;transition:background 0.15s;}
+  .cta-btn:hover{background:var(--gold2);}
+  .section{padding:32px 28px;}
+  .section-title{font-size:13px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:18px;}
+  .story-block{background:var(--bg3);border-right:3px solid var(--gold);border-radius:0 10px 10px 0;padding:16px 18px;margin-bottom:12px;}
+  .story-block p{font-size:13px;color:var(--g);line-height:1.8;}
+  .story-block p strong{color:var(--w);}
+  .structures-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:0;}
+  .struct-card{background:var(--bg3);border:1px solid var(--gold-b);border-radius:10px;padding:14px 14px 12px;text-align:center;}
+  .struct-num{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:4px;}
+  .struct-name{font-size:12px;font-weight:700;color:var(--w);line-height:1.4;}
+  .details-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:0;}
+  .detail-item{background:var(--bg3);border-radius:10px;padding:16px 12px;text-align:center;}
+  .detail-val{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:4px;}
+  .detail-label{font-size:11px;color:var(--g);}
+  .bonuses-list{display:flex;flex-direction:column;gap:10px;}
+  .bonus-item{display:flex;align-items:center;gap:12px;background:var(--bg3);border-radius:10px;padding:14px 16px;}
+  .bonus-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+  .bonus-text{font-size:13px;color:var(--g);line-height:1.6;}
+  .bonus-text strong{color:var(--w);}
+  .divider{height:1px;background:var(--gold-b);margin:0 28px;}
+  .footer-cta{padding:28px;text-align:center;}
+  .footer-cta p{font-size:13px;color:var(--g);margin-bottom:16px;line-height:1.7;}
+  .footer-cta p strong{color:var(--gold);}
+  .consumer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+  .consumer-card{background:var(--bg3);border-radius:10px;padding:14px 14px 12px;}
+  .consumer-num{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:4px;}
+  .consumer-title{font-size:12px;font-weight:700;color:var(--w);margin-bottom:4px;}
+  .consumer-desc{font-size:11px;color:var(--g);line-height:1.6;}
+</style>
+</head>
+<body>
+  
+
+
+<div class="wrapper">
+  <div class="header">
+    <div class="header-label">دليل المحتوى التسويقي</div>
+    <h1>أنواع الـ <span>Hooks</span></h1>
+    <div class="header-line"></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-num">01</div>
+      <div class="card-title">الهوك العاطفي</div>
+      <div class="card-en">Emotional Hook</div>
+      <div class="card-desc">يستثير مشاعر القارئ — فرح، خوف، أمل — ويخلق اتصال عاطفي فوري</div>
+    </div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <div class="card-title">هوك الفضول</div>
+      <div class="card-en">Curiosity Hook</div>
+      <div class="card-desc">سؤال غامض أو جملة ناقصة تخلي القارئ يكمل عشان يعرف الإجابة</div>
+    </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <div class="card-title">الهوك المعلوماتي</div>
+      <div class="card-en">Informational Hook</div>
+      <div class="card-desc">معلومة مفيدة أو مفاجئة تُقدَّم مباشرةً وتثير الاهتمام الفوري</div>
+    </div>
+    <div class="card">
+      <div class="card-num">04</div>
+      <div class="card-title">الهوك الساخر</div>
+      <div class="card-en">Humorous Hook</div>
+      <div class="card-desc">فكاهة أو تعليق طريف يكسر الجمود ويشد الانتباه بطريقة خفيفة</div>
+    </div>
+    <div class="card">
+      <div class="card-num">05</div>
+      <div class="card-title">الهوك الإحصائي</div>
+      <div class="card-en">Statistical Hook</div>
+      <div class="card-desc">رقم أو إحصائية صادمة تثبت أهمية الموضوع وتعطيه مصداقية</div>
+    </div>
+    <div class="card">
+      <div class="card-num">06</div>
+      <div class="card-title">هوك التحدي</div>
+      <div class="card-en">Challenge Hook</div>
+      <div class="card-desc">تحدي مباشر للقارئ يحفزه على التفاعل واتخاذ موقف</div>
+    </div>
+    <div class="card">
+      <div class="card-num">07</div>
+      <div class="card-title">الهوك القصصي</div>
+      <div class="card-en">Storytelling Hook</div>
+      <div class="card-desc">قصة حقيقية أو تجربة شخصية تجذب القارئ وتبني الثقة تدريجيًا</div>
+    </div>
+    <div class="card">
+      <div class="card-num">08</div>
+      <div class="card-title">الهوك التعليمي</div>
+      <div class="card-en">Educational Hook</div>
+      <div class="card-desc">وعد بتعليم شيء جديد ومفيد يجعل القارئ يستمر حتى النهاية</div>
+    </div>
+    <div class="card">
+      <div class="card-num">09</div>
+      <div class="card-title">هوك الوعد</div>
+      <div class="card-en">Promise Hook</div>
+      <div class="card-desc">وعد بنتيجة واضحة ومحددة مقابل متابعة المحتوى كاملًا</div>
+    </div>
+    <div class="card">
+      <div class="card-num">10</div>
+      <div class="card-title">الهوك التحفيزي</div>
+      <div class="card-en">Motivational Hook</div>
+      <div class="card-desc">يدفع القارئ للتحرك نحو هدفه ويكسر حاجز التردد والتأجيل</div>
+    </div>
+    <div class="card">
+      <div class="card-num">11</div>
+      <div class="card-title">الهوك الاستفهامي</div>
+      <div class="card-en">Question Hook</div>
+      <div class="card-desc">سؤال مباشر يجعل القارئ يفكر ويبحث عن الإجابة بداخل المحتوى</div>
+    </div>
+    <div class="card">
+      <div class="card-num">12</div>
+      <div class="card-title">الهوك الفعلي</div>
+      <div class="card-en">Action Hook</div>
+      <div class="card-desc">دعوة فورية لاتخاذ إجراء — اشترك، حمّل، جرّب — بلا تردد</div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="example-label">أمثلة سريعة</div>
+    <div class="example-item"><div class="dot"></div><div><strong style="color:#D4AF37">عاطفي:</strong> هل شعرت يومًا أنك عالق ولا تقدر تتقدم؟</div></div>
+    <div class="example-item"><div class="dot"></div><div><strong style="color:#D4AF37">فضول:</strong> ما هو السر الذي لا يخبرك به أصحاب الأعمال الناجحون؟</div></div>
+    <div class="example-item"><div class="dot"></div><div><strong style="color:#D4AF37">إحصائي:</strong> 80% من الناس لا يعرفون هذه الحيلة البسيطة لزيادة الإنتاجية</div></div>
+    <div class="example-item"><div class="dot"></div><div><strong style="color:#D4AF37">وعد:</strong> اقرأ حتى النهاية وستتعلم كيف تحسن حياتك المالية في 30 يومًا</div></div>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-icon">!</div>
+    <div class="tip-text">الـ Hook المناسب يتحدد بناءً على <strong>الجمهور</strong> و<strong>هدف المحتوى</strong> — اختر بحكمة ولا تستخدمهم جميعًا في نفس المحتوى</div>
+  </div>
+</div>
+
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">صفحة ورشة السرد القصصي الرقمي — التفاصيل والتسجيل</h2>
+
+<div class="page">
+
+  <div class="hero">
+    <div class="badge">الدفعة الجديدة — مفتوح التسجيل</div>
+    <h1>ورشة <span>السرد القصصي</span> الرقمي</h1>
+    <p class="hero-sub">نفس الفكرة… طريقتين مختلفتين في البناء. تعلّم كيف تحوّل الفكرة العادية إلى قصة منظمة توصل رسالتك بشكل واضح.</p>
+    <div class="price-row">
+      <div>
+        <div class="price-old">1500 جنيه</div>
+        <div class="price-new">750<span style="font-size:16px;font-weight:400;color:var(--g)"> جنيه</span></div>
+      </div>
+      <div class="price-badge">خصم رمضان 50%</div>
+    </div>
+    <button class="cta-btn" onclick="sendPrompt('أنا مهتم بالتسجيل في ورشة السرد القصصي الرقمي ↗')">اكتب مهتم ↗</button>
+  </div>
+
+  <div class="section">
+    <div class="section-title">القصة وراء الورشة</div>
+    <div class="story-block">
+      <p>من واقع العمل في <strong>كتابة المحتوى والإعلانات</strong>، كان دايمًا في سؤال بيتكرر: ليه نفس الفكرة بتنجح بطريقة وبتفشل بطريقة تانية؟</p>
+    </div>
+    <div class="story-block">
+      <p>الإجابة مكنتش في الفكرة نفسها — كانت في <strong>طريقة بناء الفكرة داخل قصة.</strong> الإعلانات الناجحة والمحتوى اللي الناس بتتفاعل معاه مبني على هياكل سردية واضحة.</p>
+    </div>
+    <div class="story-block">
+      <p>ست دفعات سابقة. تحليل إعلانات تلفزيونية، محتوى سوشيال ميديا، وحملات رقمية. والدفعة الجديدة هتكون <strong>نفس التجربة العملية.</strong></p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-title">الهياكل السردية اللي هتتعلمها</div>
+    <div class="structures-grid">
+      <div class="struct-card">
+        <div class="struct-num">01</div>
+        <div class="struct-name">Three-Act Structure</div>
+      </div>
+      <div class="struct-card">
+        <div class="struct-num">02</div>
+        <div class="struct-name">Problem — Agitate — Solve</div>
+      </div>
+      <div class="struct-card">
+        <div class="struct-num">03</div>
+        <div class="struct-name">Before — After — Bridge</div>
+      </div>
+      <div class="struct-card">
+        <div class="struct-num">04</div>
+        <div class="struct-name">Hero's Journey</div>
+      </div>
+      <div class="struct-card">
+        <div class="struct-num">05</div>
+        <div class="struct-name">Pixar Story Formula</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-title">تفاصيل الورشة</div>
+    <div class="details-row">
+      <div class="detail-item">
+        <div class="detail-val">شهر</div>
+        <div class="detail-label">مدة الورشة</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-val">4</div>
+        <div class="detail-label">سيشنات مباشرة</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-val">2h</div>
+        <div class="detail-label">كل سيشن</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-val">6+</div>
+        <div class="detail-label">دفعات سابقة</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-title">مزايا إضافية للمشتركين</div>
+    <div class="bonuses-list">
+      <div class="bonus-item">
+        <div class="bonus-dot"></div>
+        <div class="bonus-text"><strong>كورسات السرد القصصي السابقين</strong> — صلاحية وصول كاملة</div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-dot"></div>
+        <div class="bonus-text"><strong>خصومات على الورش القادمة</strong> — لأعضاء الكوميونتي</div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-dot"></div>
+        <div class="bonus-text"><strong>كوميونتي خاص للمشتركين</strong> — نقاش وأفكار وتطبيقات مستمرة</div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-dot"></div>
+        <div class="bonus-text"><strong>أسبوع تدريب عملي</strong> بعد كل سيشن على اللي اتشرح</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-title">من يحتاج هذه الورشة؟</div>
+    <div class="consumer-grid">
+      <div class="consumer-card">
+        <div class="consumer-num">01</div>
+        <div class="consumer-title">كُتّاب المحتوى</div>
+        <div class="consumer-desc">اللي عايزين يرفعوا تأثير محتواهم بشكل عملي</div>
+      </div>
+      <div class="consumer-card">
+        <div class="consumer-num">02</div>
+        <div class="consumer-title">المسوقون</div>
+        <div class="consumer-desc">اللي بيكتبوا إعلانات وحملات ويدوروا على تأثير أعمق</div>
+      </div>
+      <div class="consumer-card">
+        <div class="consumer-num">03</div>
+        <div class="consumer-title">أصحاب المنتجات</div>
+        <div class="consumer-desc">اللي عايزين يحكوا قصة منتجهم بطريقة تقنع الجمهور</div>
+      </div>
+      <div class="consumer-card">
+        <div class="consumer-num">04</div>
+        <div class="consumer-title">صناع المحتوى</div>
+        <div class="consumer-desc">اللي عايزين يبنوا محتوى يتابعه الناس لآخره</div>
+      </div>
+    </div>
+  </div>
+
+ <div class="footer-cta" style="text-align: center; padding-bottom: 40px;">
+  <a href="https://wa.me/21507786761?text=أنا%20مهتم%20بالتسجيل%20في%20ورشة%20السرد%20القصصي%20الرقمي" target="_blank" style="text-decoration: none;">
+    <button class="cta-btn">سجل الان ↗</button>
+  </a>
+</div>
+</div>
+
+
+</body>
+</html>
